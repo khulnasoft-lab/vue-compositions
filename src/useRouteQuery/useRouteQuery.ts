@@ -49,7 +49,11 @@ function factory(): () => UseRouteQuery {
     }
 
     const set = (key: string, value: LocationQueryValue | LocationQueryValue[]): void => {
-      query[key] = value
+      if (value?.length === 0) {
+        remove(key)
+      } else {
+        query[key] = value
+      }
     }
 
     const get = (key: string): LocationQueryValue | LocationQueryValue[] => {
